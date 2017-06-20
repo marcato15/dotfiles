@@ -1,15 +1,14 @@
-export TERM=xterm-256color
-export EDITOR=vim
-export TODOTXT_DEFAULT_ACTION=ls
+export PATH="/usr/local/bin:/usr/local/sbin:./bin:$PATH"
 
-export GOPATH=$HOME/go
+parse_git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+PS1="\[\e[0;33m\]$(hostname) \[\e[01;31m\]\W \$(parse_git_branch): \[\e[00m\]"
+
+export GOPATH=~/go
 export GOROOT=/usr/local/go
-export GO15VENDOREXPERIMENT=1
-export PATH=$PATH:/usr/local/go_appengine
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:/usr/local/go_appengine:/usr/local/go/bin
+export PATH=$PATH:$(go env GOPATH)/bin
 
-
-if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
-fi
+export GIT_MERGE_AUTOEDIT=no
