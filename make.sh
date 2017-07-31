@@ -6,14 +6,25 @@
 
 ########## Variables
 
-homedir=~/
-dir=$homedir/dotfiles                    # dotfiles directory
+dir=~/dotfiles                    # dotfiles directory
 
-dotfiles="bashrc bash_aliases vimrc tmux.conf todo_completion bash_profile tmux_git.sh"    # list of filesto symlink in homedir
-regfiles="todo_completion todo.sh todo.cfg"    # list of filesto symlink in homedir
-dotdirs="vim todo.actions.d"    # list of folders to symlink in homedir
+dotfiles="bashrc bash_aliases tmux.conf bash_profile tmux_git.sh"    # list of filesto symlink in homedir
 
 ##########
+
+#Dependencies
+if ! hash pip3 2>/dev/null; then
+    sudo apt-get install python3-pip 1>/dev/null
+fi
+
+if ! hash nvim 2>/dev/null; then
+    echo "Installing NeoVim"
+    sudo add-apt-repository ppa:neovim-ppa/stable 1>/dev/null &&
+    sudo apt-get update 1>/dev/null &&
+    sudo apt-get install neovim 1>/dev/null &&
+    pip3 install neovim 1>/dev/null
+fi
+
 
 # change to the dotfiles directory
 cd $dir
@@ -23,18 +34,23 @@ for file in $dotfiles; do
     rm ~/.$file 2>/dev/null
     ln -s $dir/$file ~/.$file 2>/dev/null
 done
-for file in $regfiles; do
-    rm ~/$file 2>/dev/null
-    ln -s $dir/$file ~/$file 2>/dev/null
-done
-for folder in $dotdirs; do
-    rm -rf ~/.$folder 2>/dev/null
-    ln -s $dir/$folder ~/.$folder 2>/dev/null
-done
 
-#Install Vundle if not already installed and install plugins
-if [ -d $homedir/.vim ] && ! [ -d $homedir/.vim/bundle/Vundle.vim ]; then
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    vim +PluginInstall +qall >/dev/null
+rm -rf ~/.vim 2>/dev/null
+ln -s $dir/vim ~/.vim
+
+# Add neovim config
+mkdir -p ~/.config/nvim
+rm ~/.config/nvim/init.vim 2>/dev/null
+ln -s $dir/init.vim ~/.config/nvim/
+
+
+#Install VimPlug
+if ! [ -f ~/.local/share/nvim/site/autoload/plug.vim ]; then
+    echo "Installing VimPlug"
+    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
+
+nvim +PlugInstall +qall
+
 echo "done"
