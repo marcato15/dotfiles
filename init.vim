@@ -95,6 +95,13 @@ augroup ft_go
     au Filetype go setlocal listchars+=tab:\ \ 
 augroup END
 
+let g:ale_fixers = {
+\   'javascript': [
+\      'eslint',
+\   ]
+\}
+let g:ale_fix_on_save = 1
+
 let g:ale_linters = {
 \   'go': [
 \       'go build'
@@ -207,6 +214,7 @@ let g:go_fmt_command = "goimports"
 
 "map <leader>(gd) to godocumentation
 au FileType go nmap <Leader>gd <Plug>(go-doc)
+
 
 " -------------------------------------------------
 "  multi-byte characters
