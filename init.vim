@@ -1,7 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 
 "current theme
 Plug 'sjl/badwolf'
@@ -129,11 +129,6 @@ set ttyfast
 " -------------------------------------------------
 "  hiding status bar 
 " -------------------------------------------------
-set laststatus=0
-set noshowmode
-set noruler
-set noshowcmd
-
 let s:hidden_all = 0
 function! ToggleHiddenAll()
     if s:hidden_all  == 0
@@ -254,3 +249,4 @@ au FileType go nmap <Leader>gd <Plug>(go-doc)
 set number
 "column to display the limit row
 set colorcolumn=80
+
