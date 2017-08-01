@@ -25,6 +25,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'fleischie/vim-styled-components'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'iCyMind/NeoSolarized'
+Plug 'rakr/vim-one'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'lunaru/vim-twig'
@@ -80,7 +81,9 @@ let g:solarized_termcolors=256
 " -------------------------------------------------
 "Enable Syntax Highlighting
 syntax on
-colorscheme NeoSolarized
+
+"colorscheme NeoSolarized
+colorscheme one
 set background=dark
 
 "show tabs and trailing spaces
