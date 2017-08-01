@@ -19,11 +19,12 @@ Plug 'godlygeek/tabular'
 
 "search
 Plug 'scrooloose/nerdtree'
+Plug 'kshenoy/vim-signature'
 
 "syntax highlight and colors
 Plug 'fleischie/vim-styled-components'
 Plug 'hail2u/vim-css3-syntax'
-Plug 'altercation/vim-colors-solarized'
+Plug 'iCyMind/NeoSolarized'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'lunaru/vim-twig'
@@ -37,6 +38,7 @@ Plug 'fatih/vim-go'
 
 "git integration
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -78,13 +80,8 @@ let g:solarized_termcolors=256
 " -------------------------------------------------
 "Enable Syntax Highlighting
 syntax on
+colorscheme NeoSolarized
 set background=dark
-
-"allow the terminal to display transparent when necessary
-let g:solarized_termtrans = 1
-
-"YAY Solarized
-colorscheme solarized
 
 "show tabs and trailing spaces
 set list listchars=tab:»·,trail:·
@@ -108,6 +105,7 @@ let g:ale_linters = {
 \   ]
 \}
 
+
 " -------------------------------------------------
 "  autocompletion
 " -------------------------------------------------
@@ -116,8 +114,9 @@ let g:deoplete#sources#go#use_cache = '~/.cache/deoplete/go/$GOOS_$GOARCH'
 let g:deoplete#enable_at_startup = 1
 
 " -------------------------------------------------
-"  multiple windows
+"  git integration
 " -------------------------------------------------
+let g:gitgutter_override_sign_column_highlight = 0
 
 " -------------------------------------------------
 "  multiple tab pages
