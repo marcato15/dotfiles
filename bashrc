@@ -60,6 +60,14 @@ else
 fi
 unset color_prompt force_color_prompt
 
+parse_git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+PS1="\[\e[0;33m\]$(hostname) \[\e[01;31m\]\W \$(parse_git_branch): \[\e[00m\]"
+
+
+
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
@@ -115,4 +123,5 @@ fi
 
 #No need to use <C-s> and <C-q> top stop and start stty
 stty -ixon
+
 
