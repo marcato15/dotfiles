@@ -3,6 +3,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+"current theme
+Plug 'sjl/badwolf'
+
 "'sensible' defaults
 Plug 'tpope/vim-sensible'
 
@@ -25,7 +28,6 @@ Plug 'kshenoy/vim-signature'
 Plug 'fleischie/vim-styled-components'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'iCyMind/NeoSolarized'
-Plug 'rakr/vim-one'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'lunaru/vim-twig'
@@ -38,8 +40,8 @@ Plug 'fatih/vim-go'
 
 
 "git integration
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+"Plug 'tpope/vim-fugitive'
+"Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -70,20 +72,13 @@ set hlsearch
 " -------------------------------------------------
 
 
-" -------------------------------------------------
-" solarized
-" -------------------------------------------------
-let g:solarized_termcolors=256
-
 
 " -------------------------------------------------
 "  syntax, highlighting and spelling
 " -------------------------------------------------
 "Enable Syntax Highlighting
 syntax on
-
-"colorscheme NeoSolarized
-colorscheme one
+colorscheme badwolf 
 set background=dark
 
 "show tabs and trailing spaces
@@ -119,7 +114,7 @@ let g:deoplete#enable_at_startup = 1
 " -------------------------------------------------
 "  git integration
 " -------------------------------------------------
-let g:gitgutter_override_sign_column_highlight = 0
+"let g:gitgutter_override_sign_column_highlight = 0
 
 " -------------------------------------------------
 "  multiple tab pages
@@ -132,9 +127,39 @@ map <c-t> :tabnew<CR>
 set ttyfast
 
 " -------------------------------------------------
+"  hiding status bar 
+" -------------------------------------------------
+set laststatus=0
+set noshowmode
+set noruler
+set noshowcmd
+
+let s:hidden_all = 0
+function! ToggleHiddenAll()
+    if s:hidden_all  == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+    else
+        let s:hidden_all = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+    endif
+endfunction
+
+nnoremap <S-h> :call ToggleHiddenAll()<CR>
+
+
+" -------------------------------------------------
 "  using the mouse
 " -------------------------------------------------
 set mouse=
+
+
 
 " -------------------------------------------------
 "  printing
