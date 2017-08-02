@@ -17,18 +17,18 @@ if ! hash tmux-next 2>/dev/null; then
     echo "Upgrading tmux to latest version"
     sudo add-apt-repository -yu ppa:pi-rho/dev
     sudo apt-get update
-    sudo apt-get install tmux-next
+    sudo apt-get install -y tmux-next
 fi
 
 if ! hash pip3 2>/dev/null; then
-    sudo apt-get install python3-pip 1>/dev/null
+    sudo apt-get install -y python3-pip 1>/dev/null
 fi
 
 if ! hash nvim 2>/dev/null; then
     echo "Installing NeoVim"
     sudo add-apt-repository ppa:neovim-ppa/stable 1>/dev/null &&
     sudo apt-get update 1>/dev/null &&
-    sudo apt-get install neovim 1>/dev/null &&
+    sudo apt-get install -y neovim 1>/dev/null &&
     pip3 install neovim 1>/dev/null
 fi
 
@@ -43,6 +43,7 @@ for file in $dotfiles; do
 done
 
 rm -rf ~/.vim 2>/dev/null
+mkdir -p $dir/vim/plugged
 ln -s $dir/vim ~/.vim
 
 # Add neovim config
