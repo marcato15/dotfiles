@@ -1,3 +1,4 @@
 alias tmux="/usr/bin/tmux-next"
-#alias tmux="TERM=xterm-256color /usr/bin/tmux"
 alias vim="nvim"
+alias docker="sudo docker"
+alias docker-compose="sudo docker-compose"
