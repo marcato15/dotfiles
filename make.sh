@@ -8,7 +8,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 
-dotfiles="bashrc bash_aliases tmux.conf bash_profile tmux_git.sh"    # list of filesto symlink in homedir
+dotfiles="bashrc bash_aliases tmux.conf tmux_completion bash_profile tmux_git.sh"    # list of filesto symlink in homedir
 
 ##########
 
@@ -30,6 +30,7 @@ if ! hash nvim 2>/dev/null; then
     sudo apt-get update 1>/dev/null &&
     sudo apt-get install -y neovim 1>/dev/null &&
     pip3 install neovim 1>/dev/null
+    sudo gem install neovim >/dev/null
 fi
 
 
