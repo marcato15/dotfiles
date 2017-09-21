@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'danro/rename.vim'
 
 "current theme
 Plug 'sjl/badwolf'
@@ -44,8 +45,8 @@ Plug 'fatih/vim-go'
 
 
 "git integration
-"Plug 'tpope/vim-fugitive'
-"Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -55,8 +56,12 @@ call plug#end()
 "Who cares about vi compatability
 set nocompatible
 
+" Allow netrw to remove non-empty local directories
+let g:netrw_localrmdir='rm -r'
+
+
 " -------------------------------------------------
-"  moving around, searching and patterns
+"  moving around, eearching and patterns
 " -------------------------------------------------
 "Ignore case in search mode
 set ignorecase
@@ -123,7 +128,7 @@ autocmd CompleteDone * pclose!
 " -------------------------------------------------
 "  git integration
 " -------------------------------------------------
-"let g:gitgutter_override_sign_column_highlight = 0
+let g:gitgutter_override_sign_column_highlight = 0
 
 " -------------------------------------------------
 "  multiple tab pages
@@ -135,27 +140,6 @@ map <c-t> :tabnew<CR>
 " -------------------------------------------------
 set ttyfast
 
-" -------------------------------------------------
-"  hiding status bar 
-" -------------------------------------------------
-let s:hidden_all = 0
-function! ToggleHiddenAll()
-    if s:hidden_all  == 0
-        let s:hidden_all = 1
-        set noshowmode
-        set noruler
-        set laststatus=0
-        set noshowcmd
-    else
-        let s:hidden_all = 0
-        set showmode
-        set ruler
-        set laststatus=2
-        set showcmd
-    endif
-endfunction
-
-nnoremap <S-h> :call ToggleHiddenAll()<CR>
 
 
 " -------------------------------------------------
@@ -201,6 +185,11 @@ set nofoldenable
 " -------------------------------------------------
 " start diff mode with vertical splits by default
 set diffopt+=vertical
+
+" change split directions because it feels better to me that way.
+set splitbelow
+set splitright
+
 
 " -------------------------------------------------
 "  mapping
@@ -252,10 +241,18 @@ au FileType go nmap <Leader>gd <Plug>(go-doc)
 " -------------------------------------------------
 "  various
 " -------------------------------------------------
-"Show numbers in the gutter
-set number
+
+ "Show numbers in the gutter
+ set number relativenumber
+
+ augroup numbertoggle
+   autocmd!
+   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+ augroup END
+ 
 "column to display the limit row
-set colorcolumn=80
+let &colorcolumn=join(range(80,999),",")
 
 autocmd User ProjectionistDetect
 \ call projectionist#append(getcwd(),
