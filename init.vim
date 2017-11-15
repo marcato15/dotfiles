@@ -103,6 +103,11 @@ augroup ft_go
     au Filetype go setlocal listchars+=tab:\ \ 
 augroup END
 
+augroup FiletypeGroup
+    autocmd!
+    au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+augroup END
+
 let g:ale_fixers = {
 \   'javascript': [
 \      'eslint',
@@ -111,11 +116,11 @@ let g:ale_fixers = {
 let g:ale_fix_on_save = 1
 
 let g:ale_linters = {
-\   'go': [
-\       'go build'
-\   ]
+\   'go': ['go build' ],
+\   'jsx': ['stylelint', 'eslint']
 \}
 
+let g:ale_linter_aliases = {'jsx': 'css'}
 
 " -------------------------------------------------
 "  autocompletion
@@ -239,20 +244,17 @@ au FileType go nmap <Leader>gd <Plug>(go-doc)
 " -------------------------------------------------
 
 " -------------------------------------------------
+"  multi-byte characters
+" -------------------------------------------------
+
+" -------------------------------------------------
 "  various
 " -------------------------------------------------
 
- "Show numbers in the gutter
- set number relativenumber
-
- augroup numbertoggle
-   autocmd!
-   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
- augroup END
- 
 "column to display the limit row
 let &colorcolumn=join(range(80,999),",")
+set number
+set relativenumber
 
 autocmd User ProjectionistDetect
 \ call projectionist#append(getcwd(),

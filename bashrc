@@ -131,3 +131,5 @@ fi
 stty -ixon
 
 
+
+export PATH="$HOME/.yarn/bin:$PATH"
