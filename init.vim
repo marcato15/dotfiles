@@ -1,7 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 Plug 'danro/rename.vim'
 
 "current theme
@@ -16,14 +16,17 @@ Plug 'w0rp/ale'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'tpope/vim-projectionist'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 "text manipulation
-Plug 'tpope/vim-surround'
-Plug 'mattn/emmet-vim'
+"Plug 'tpope/vim-surround'
+"Plug 'mattn/emmet-vim'
 Plug 'godlygeek/tabular'
 
 "search
 Plug 'tpope/vim-vinegar'
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'wincent/command-t', {
 \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
 \ }
@@ -32,21 +35,21 @@ Plug 'kshenoy/vim-signature'
 "syntax highlight and colors
 Plug 'fleischie/vim-styled-components'
 Plug 'hail2u/vim-css3-syntax'
-Plug 'iCyMind/NeoSolarized'
+"Plug 'iCyMind/NeoSolarized'
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'
-Plug 'lunaru/vim-twig'
+"Plug 'lunaru/vim-twig'
 Plug 'gregsexton/matchtag'
 Plug 'plasticboy/vim-markdown'
 Plug 'rodjek/vim-puppet'
 Plug 'othree/html5.vim'
 Plug 'StanAngeloff/php.vim'
-Plug 'fatih/vim-go'
+"Plug 'fatih/vim-go'
 
 
 "git integration
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+"Plug 'tpope/vim-fugitive'
+"Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -92,7 +95,7 @@ set wildignore+=*/cache/*,*/node_modules/*,*/vendor/*,*/craft/*
 syntax on
 colorscheme badwolf 
 set background=dark
-let g:airline_solarized_bg='dark'
+"let g:airline_solarized_bg='dark'
 
 "show tabs and trailing spaces
 set list listchars=tab:»·,trail:·
@@ -108,27 +111,31 @@ augroup FiletypeGroup
     au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 augroup END
 
-let g:ale_fixers = {
-\   'javascript': [
-\      'eslint',
-\   ]
-\}
-let g:ale_fix_on_save = 1
-
 let g:ale_linters = {
-\   'go': ['go build' ],
-\   'jsx': ['stylelint', 'eslint']
+\   'jsx': ['stylelint', 'eslint'],
+\   'go': ['go build']
 \}
 
 let g:ale_linter_aliases = {'jsx': 'css'}
 
+let g:ale_fixers = {'javascript': ['prettier']}
+let g:ale_javascript_prettier_options = '-single-quote --trailing-comma all --write'
+let g:ale_fix_on_save = 1
+
+
 " -------------------------------------------------
 "  autocompletion
 " -------------------------------------------------
-let g:deoplete#sources#go#gocode_binary = '/home/vagrant/go/bin/gocode'
-let g:deoplete#sources#go#use_cache = '~/.cache/deoplete/go/$GOOS_$GOARCH'
-let g:deoplete#enable_at_startup = 1
-autocmd CompleteDone * pclose!
+"let g:deoplete#sources#go#gocode_binary = '/home/vagrant/go/bin/gocode'
+"let g:deoplete#sources#go#use_cache = '~/.cache/deoplete/go/$GOOS_$GOARCH'
+"let g:deoplete#enable_at_startup = 1
+"autocmd CompleteDone * pclose!
+
+"autocmd FileType js UltiSnipsAddFiletypes javascript-react
+"let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips']
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-n>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-p>"
 
 " -------------------------------------------------
 "  git integration
@@ -254,7 +261,7 @@ au FileType go nmap <Leader>gd <Plug>(go-doc)
 "column to display the limit row
 let &colorcolumn=join(range(80,999),",")
 set number
-set relativenumber
+"set relativenumber
 
 autocmd User ProjectionistDetect
 \ call projectionist#append(getcwd(),
