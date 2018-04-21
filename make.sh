@@ -11,26 +11,27 @@ dir=~/dotfiles                    # dotfiles directory
 dotfiles="bashrc bash_aliases tmux.conf tmux_completion bash_profile tmux_git.sh"    # list of filesto symlink in homedir
 
 ##########
+if ! hash brew 2>/dev/null; then
+    echo "Installing Homebrew"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
 
 #Dependencies
 if ! hash tmux-next 2>/dev/null; then
     echo "Upgrading tmux to latest version"
-    sudo add-apt-repository -yu ppa:pi-rho/dev
-    sudo apt-get update
-    sudo apt-get install -y tmux-next
+    brew install tmux
 fi
 
 if ! hash pip3 2>/dev/null; then
-    sudo apt-get install -y python3-pip 1>/dev/null
+    brew install python
+    brew install python3
+    pip2 install neovim --upgrade
+    pip3 install neovim --upgrade
 fi
 
 if ! hash nvim 2>/dev/null; then
     echo "Installing NeoVim"
-    sudo add-apt-repository ppa:neovim-ppa/stable 1>/dev/null &&
-    sudo apt-get update 1>/dev/null &&
-    sudo apt-get install -y neovim 1>/dev/null &&
-    pip3 install neovim 1>/dev/null
-    sudo gem install neovim >/dev/null
+    brew install neovim/neovim/neovim
 fi
 
 
