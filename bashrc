@@ -135,3 +135,12 @@ stty -ixon
 export PATH="$HOME/.yarn/bin:$PATH"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# docker-compose with persistent s3 and mysql
+alias dcp="docker-compose -f docker-compose.yml -f docker-compose-persist.yml $@"
+# docker-compose for webtest
+alias dcwt="docker-compose -f docker-compose.yml -f docker-compose-webtest.yml $@"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
