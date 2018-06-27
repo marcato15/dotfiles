@@ -2,11 +2,6 @@ export TERM=xterm-256color
 export EDITOR=vim
 export TODOTXT_DEFAULT_ACTION=ls
 
-#export PATH=$PATH:/usr/local/go/bin
-#export GOPATH=$HOME/go
-#export PATH=$PATH:$GOPATH/bin
-#export PATH=$PATH:$HOME/.fastlane/bin
-
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -141,7 +136,7 @@ stty -ixon
 
 
 
-export PATH="/Users/marcato15/Library/Python/3.6/bin:/usr/local/bin:$HOME/.yarn/bin:$PATH"
+export PATH="/usr/local/bin:$HOME/.yarn/bin:$PATH"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
