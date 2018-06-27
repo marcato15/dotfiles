@@ -19,6 +19,7 @@ fi
 #Dependencies
 if ! hash tmux-next 2>/dev/null; then
     echo "Upgrading tmux to latest version"
+    brew install coreutils
     brew install tmux
 fi
 

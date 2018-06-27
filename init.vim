@@ -102,7 +102,7 @@ set list listchars=tab:»·,trail:·
 augroup ft_go
     au!
 
-    au Filetype go setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
+    au Filetype go setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
     au Filetype go setlocal listchars+=tab:\ \ 
 augroup END
 
@@ -122,8 +122,8 @@ let g:ale_javascript_eslint_suppress_missing_config = 1
 
 let g:ale_linter_aliases = {'jsx': 'css'}
 
-let g:ale_fixers = {'javascript': ['prettier']}
-let g:ale_javascript_prettier_options = '--trailing-comma all --write'
+let g:ale_fixers = {'javascript': ['eslint']}
+let g:ale_javascript_prettier_options = '--trailing-comma all --single-quote --write'
 let g:ale_fix_on_save = 1
 
 
@@ -185,9 +185,9 @@ set formatoptions+=j
 " -------------------------------------------------
 "  tabs and indenting
 " -------------------------------------------------
-set tabstop=4
+set tabstop=2
 "Spaces not tabs
-set shiftwidth=4
+set shiftwidth=2
 "Change existing tabs to spaces
 set expandtab
 
