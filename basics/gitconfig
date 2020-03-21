@@ -1,8 +1,5 @@
 [user]
-	name = Jared Meyering
-	email = jared.meyering@gmail.com
-	signingkey = 7263D0F57A22FA99
+	name = Marc Tanis	 
+	email = marcato15gmail.com 
 [push]
 	default = simple
-[commit]
-	gpgsign = true
